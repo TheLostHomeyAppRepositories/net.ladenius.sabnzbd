@@ -11,7 +11,8 @@
     "measure_download_speed",
     "sabnzbd_status",
     "measure_queue_size",
-    "measure_queue_count"
+    "measure_queue_count",
+    "measure_disk_space"
   ],
   "capabilitiesOptions": {
     "onoff": {
@@ -25,6 +26,9 @@
     },
     "measure_queue_count": {
       "title": { "en": "Items", "nl": "Items" }
+    },
+    "measure_disk_space": {
+      "title": { "en": "Free Disk Space", "nl": "Vrije schijfruimte" }
     }
   },
   "settings": [

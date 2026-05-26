@@ -11,6 +11,10 @@ class SabnzbdDevice extends Homey.Device {
     this._prevQueueCount = null;
     this._seenHistoryIds = null; // null = first poll, skip triggering
 
+    if (!this.hasCapability('measure_disk_space')) {
+      await this.addCapability('measure_disk_space');
+    }
+
     this.registerCapabilityListener('onoff', async (value) => {
       if (value) {
         await this._api.resume();
@@ -47,6 +51,7 @@ class SabnzbdDevice extends Homey.Device {
       const speedMbps = parseFloat(queue.kbpersec || 0) / 1024;
       const queueSizeMb = parseFloat(queue.mbleft || 0);
       const queueCount = parseInt(queue.noofslots || 0, 10);
+      const diskSpaceGb = parseFloat(queue.diskspace1 || 0);
       const status = this._parseStatus(queue, queueCount);
 
       await Promise.all([
@@ -55,6 +60,7 @@ class SabnzbdDevice extends Homey.Device {
         this.setCapabilityValue('measure_queue_size', Math.round(queueSizeMb)),
         this.setCapabilityValue('measure_queue_count', queueCount),
         this.setCapabilityValue('onoff', !queue.paused),
+        this.setCapabilityValue('measure_disk_space', parseFloat(diskSpaceGb.toFixed(1))),
       ]);
 
       await this._handleStatusEvents(status, queueCount);

@@ -13,6 +13,7 @@ Each SABnzbd instance is added as a Homey device that continuously reports:
 - **Status** — `idle`, `downloading`, `paused`, or `error`
 - **Queue Size** — Remaining data to download in MB
 - **Queue Items** — Number of items in the queue
+- **Free Disk Space** — Available disk space on the SABnzbd download folder in GB
 
 ### Flow triggers
 
@@ -27,6 +28,7 @@ Each SABnzbd instance is added as a Homey device that continuously reports:
 - **Download speed is above X MB/s** — True when the current speed exceeds the given value.
 - **Download speed is below X MB/s** — True when the current speed is under the given value.
 - **Queue size is above X GB** — True when the remaining queue exceeds the given size.
+- **Free disk space is below X GB** — True when the available disk space on the SABnzbd server drops below the given value.
 
 ### Flow actions
 
@@ -56,3 +58,4 @@ Multiple SABnzbd instances can be added as separate devices.
 - **Download done notification** — When a download completed → Send a push notification with the download name.
 - **Pause on arrival** — When I arrive home and SABnzbd is downloading → Pause, to free up bandwidth.
 - **Queue cleared** — When queue is empty → Turn off the NAS.
+- **Low disk space alert** — When status changed and free disk space is below 10 GB → Send a push notification.

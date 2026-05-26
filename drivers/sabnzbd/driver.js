@@ -26,6 +26,9 @@ class SabnzbdDriver extends Homey.Driver {
     this.homey.flow.getConditionCard('queue_size_above')
       .registerRunListener(({ device, size }) => device.getCapabilityValue('measure_queue_size') > size * 1024);
 
+    this.homey.flow.getConditionCard('disk_space_below')
+      .registerRunListener(({ device, threshold }) => device.getCapabilityValue('measure_disk_space') < threshold);
+
     this.homey.flow.getActionCard('pause')
       .registerRunListener(({ device }) => device.cmdPause());
 

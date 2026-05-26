@@ -131,6 +131,34 @@
     "conditions": [
       {
         "title": {
+          "en": "Free disk space !{{is|is not}} below {{threshold}} GB",
+          "nl": "Vrije schijfruimte !{{is|is niet}} lager dan {{threshold}} GB"
+        },
+        "titleFormatted": {
+          "en": "Free disk space !{{is|is not}} below [[threshold]] GB",
+          "nl": "Vrije schijfruimte !{{is|is niet}} lager dan [[threshold]] GB"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sabnzbd"
+          },
+          {
+            "name": "threshold",
+            "type": "number",
+            "title": {
+              "en": "Threshold (GB)",
+              "nl": "Drempelwaarde (GB)"
+            },
+            "min": 0,
+            "step": 1
+          }
+        ],
+        "id": "disk_space_below"
+      },
+      {
+        "title": {
           "en": "!{{Is|Is not}} actively downloading",
           "nl": "!{{Is|Is niet}} actief aan het downloaden"
         },
@@ -352,7 +380,8 @@
         "measure_download_speed",
         "sabnzbd_status",
         "measure_queue_size",
-        "measure_queue_count"
+        "measure_queue_count",
+        "measure_disk_space"
       ],
       "capabilitiesOptions": {
         "onoff": {
@@ -377,6 +406,12 @@
           "title": {
             "en": "Items",
             "nl": "Items"
+          }
+        },
+        "measure_disk_space": {
+          "title": {
+            "en": "Free Disk Space",
+            "nl": "Vrije schijfruimte"
           }
         }
       },
@@ -444,6 +479,23 @@
     }
   ],
   "capabilities": {
+    "measure_disk_space": {
+      "type": "number",
+      "title": {
+        "en": "Free Disk Space",
+        "nl": "Vrije schijfruimte"
+      },
+      "units": {
+        "en": "GB",
+        "nl": "GB"
+      },
+      "decimals": 1,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/measure_disk_space.svg",
+      "insights": true
+    },
     "measure_download_speed": {
       "type": "number",
       "title": {
